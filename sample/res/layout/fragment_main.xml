@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_dark"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <android.gesture.GestureOverlayView
+        android:id="@+id/signaturePad"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:eventsInterceptionEnabled="true"
+        android:fadeEnabled="false"
+        android:gestureColor="@android:color/background_dark"
+        android:gestureStrokeAngleThreshold="0.001"
+        android:gestureStrokeLengthThreshold="0.001"
+        android:gestureStrokeSquarenessThreshold="0.001"
+        android:gestureStrokeType="single"
+        android:gestureStrokeWidth="12"
+        android:orientation="vertical"
+        android:uncertainGestureColor="@android:color/transparent" >
+
+        <com.skd.sketchview.SketchView
+            android:id="@+id/paintCanvas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.gesture.GestureOverlayView>
+
+    <Button
+        android:id="@+id/saveBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save" />
+
+</LinearLayout>
