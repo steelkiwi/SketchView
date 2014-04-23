@@ -1,13 +1,7 @@
 package com.skd.sketchview;
 
-import java.io.File;
-import java.io.FileOutputStream;
-
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
@@ -22,11 +16,6 @@ import com.skd.sketchview.settings.SkSize;
 //TODO
 /*
  * action bar:
- * -color -> drop down list (base colors up to 10)
- * -stroke width -> drop down list (3 sizes - thin, medium, thick)
- * -erase -> drop down list (3 sizes - thin, medium, thick)
- * -save (to sd card to external directory of the project)
- * -settings:
  * --add picture bg (open gallery to choose image)
  * */
 
@@ -135,18 +124,9 @@ public class MainActivity extends ActionBarActivity {
 
 	}
 	
-	private void save() { //TODO rewrite
-		try {
-			Bitmap bm = getSketchFragment().getSketchBimap();
-			File f = new File(Environment.getExternalStorageDirectory() + File.separator + "sketch.png");
-			f.createNewFile();
-			FileOutputStream os = new FileOutputStream(f);
-			bm.compress(Bitmap.CompressFormat.PNG, 100, os);
-			os.close();
-		} catch (Exception e) {
-			Log.v("Gestures", e.getMessage());
-			e.printStackTrace();
-		}
+	private void save() {
+		SaveSketchAsyncTask task = new SaveSketchAsyncTask(MainActivity.this);
+		task.execute(getSketchFragment().getSketchBimap());
 	}
 	
 }

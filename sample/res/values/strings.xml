@@ -33,4 +33,8 @@
     <string name="dlg_size_medium">Medium</string>
     <string name="dlg_size_thick">Thick</string>
     
+    <string name="progress_save">Saving sketch..</string>
+    <string name="success_save">Sketch saved to %s</string>
+    <string name="error_save">Sketch was not saved</string>
+    
 </resources>
