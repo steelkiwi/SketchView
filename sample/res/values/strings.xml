@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">GestureSketch</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">SketchView</string>
 
+    <string name="action_color">Color</string>
+    <string name="action_size">Size</string>
+    <string name="action_eraser">Eraser</string>
+    <string name="action_save">Save</string>
+    <string name="action_bg">Add Image</string>
+
+    <string name="dlg_close">Close</string>
+    
+    <!-- color picker dialog -->
+    
+    <string name="dlg_color_title">Choose Brush Color</string>
+    
+    <!-- size picker dialog -->
+    
+    <string name="dlg_size_title">Choose Brush Size</string>
+    <string name="dlg_eraser_size_title">Choose Eraser Size</string>
+    
 </resources>

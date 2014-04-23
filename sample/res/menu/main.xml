@@ -4,9 +4,29 @@
     tools:context="com.skd.gesturesketch.MainActivity" >
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_color"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/action_color"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_size"
+        android:orderInCategory="101"
+        android:title="@string/action_size"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_eraser"
+        android:orderInCategory="102"
+        android:title="@string/action_eraser"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_save"
+        android:orderInCategory="103"
+        android:title="@string/action_save"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/action_bg"
+        android:orderInCategory="104"
+        android:title="@string/action_bg"
         app:showAsAction="never"/>
 
 </menu>
