@@ -14,6 +14,16 @@
     <!-- color picker dialog -->
     
     <string name="dlg_color_title">Choose Brush Color</string>
+    <string name="dlg_color_red">Red</string>
+    <string name="dlg_color_orange">Orange</string>
+    <string name="dlg_color_yellow">Yellow</string>
+    <string name="dlg_color_green">Green</string>
+    <string name="dlg_color_cyan">Cyan</string>
+    <string name="dlg_color_blue">Blue</string>
+    <string name="dlg_color_magenta">Magenta</string>
+    <string name="dlg_color_gray">Gray</string>
+    <string name="dlg_color_black">Black</string>
+    <string name="dlg_color_white">White</string>
     
     <!-- size picker dialog -->
     

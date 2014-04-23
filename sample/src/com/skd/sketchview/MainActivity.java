@@ -11,10 +11,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
+import android.widget.Toast;
 
 import com.skd.sketchview.dialogs.ColorPickerDialog;
 import com.skd.sketchview.dialogs.EraserSizePickerDialog;
 import com.skd.sketchview.dialogs.SizePickerDialog;
+import com.skd.sketchview.settings.SkColor;
 
 //TODO
 /*
@@ -104,6 +106,10 @@ public class MainActivity extends ActionBarActivity {
 	private void chooseColor() {
 		ColorPickerDialog dlg = new ColorPickerDialog();
 		dlg.show(getSupportFragmentManager(), ColorPickerDialog.class.getSimpleName());
+	}
+	
+	public void onColorSet(SkColor color) {
+		Toast.makeText(MainActivity.this, color.getTitle(), Toast.LENGTH_SHORT).show();
 	}
 	
 	private void chooseSize() {
