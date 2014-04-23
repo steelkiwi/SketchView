@@ -17,6 +17,7 @@ import com.skd.sketchview.dialogs.ColorPickerDialog;
 import com.skd.sketchview.dialogs.EraserSizePickerDialog;
 import com.skd.sketchview.dialogs.SizePickerDialog;
 import com.skd.sketchview.settings.SkColor;
+import com.skd.sketchview.settings.SkSize;
 
 //TODO
 /*
@@ -117,9 +118,17 @@ public class MainActivity extends ActionBarActivity {
 		dlg.show(getSupportFragmentManager(), SizePickerDialog.class.getSimpleName());
 	}
 	
+	public void onSizeSet(SkSize size) {
+		Toast.makeText(MainActivity.this, size.getTitle(), Toast.LENGTH_SHORT).show();
+	}
+	
 	private void chooseEraserSize() {
 		EraserSizePickerDialog dlg = new EraserSizePickerDialog();
 		dlg.show(getSupportFragmentManager(), EraserSizePickerDialog.class.getSimpleName());
+	}
+	
+	public void onEraserSizeSet(SkSize size) {
+		Toast.makeText(MainActivity.this, size.getTitle(), Toast.LENGTH_SHORT).show();
 	}
 	
 	private void chooseImage() {
@@ -138,7 +147,6 @@ public class MainActivity extends ActionBarActivity {
 			Log.v("Gestures", e.getMessage());
 			e.printStackTrace();
 		}
-		
 	}
 	
 }

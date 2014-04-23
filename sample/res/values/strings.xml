@@ -29,5 +29,8 @@
     
     <string name="dlg_size_title">Choose Brush Size</string>
     <string name="dlg_eraser_size_title">Choose Eraser Size</string>
+    <string name="dlg_size_thin">Thin</string>
+    <string name="dlg_size_medium">Medium</string>
+    <string name="dlg_size_thick">Thick</string>
     
 </resources>

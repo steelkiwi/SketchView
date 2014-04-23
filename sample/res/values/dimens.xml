@@ -4,4 +4,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="size_brush_thin">4dp</dimen>
+    <dimen name="size_brush_medium">8dp</dimen>
+    <dimen name="size_brush_thick">12dp</dimen>
+    
 </resources>
