@@ -1,22 +1,22 @@
 <android.gesture.GestureOverlayView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/signaturePad"
+    android:id="@+id/gestureOverlay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:eventsInterceptionEnabled="true"
     android:fadeEnabled="false"
-    android:gestureColor="@android:color/background_dark"
+    android:gestureColor="@color/color_black"
     android:gestureStrokeAngleThreshold="0.001"
     android:gestureStrokeLengthThreshold="0.001"
     android:gestureStrokeSquarenessThreshold="0.001"
     android:gestureStrokeType="single"
-    android:gestureStrokeWidth="12"
+    android:gestureStrokeWidth="@integer/size_brush_medium"
     android:orientation="vertical"
     android:uncertainGestureColor="@android:color/transparent" >
 
     <com.skd.sketchview.SketchView
-        android:id="@+id/paintCanvas"
+        android:id="@+id/sketchCanvas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

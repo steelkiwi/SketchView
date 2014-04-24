@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="size_brush_thin" type="integer">6</item>
+    <item name="size_brush_medium" type="integer">12</item>
+    <item name="size_brush_thick" type="integer">20</item>
+
+</resources>

@@ -8,8 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.skd.sketchview.settings.SkColor;
+import com.skd.sketchview.settings.SkSize;
+import com.skd.sketchview.sketch.SketchManager;
+
 public class SketchFragment extends Fragment {
 
+	public static final String COLOR = "argColor";
+	public static final String SIZE = "argSize";
+	
 	private GestureOverlayView gestureView;
 	private SketchView sketchView;
 	
@@ -25,12 +32,29 @@ public class SketchFragment extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		
-		sketchView = (SketchView) getView().findViewById(R.id.paintCanvas);
+		sketchView = (SketchView) getView().findViewById(R.id.sketchCanvas);
+		sketchView.setBrushes(SketchManager.createBrushes(getResources()));
 		
-		gestureView = (GestureOverlayView) getView().findViewById(R.id.signaturePad);
+		gestureView = (GestureOverlayView) getView().findViewById(R.id.gestureOverlay);
 		gestureView.addOnGestureListener(sketchView);
+		gestureView.addOnGesturePerformedListener(sketchView);
+		
+		if (getArguments() != null) {
+			int color = getArguments().getInt(COLOR, getResources().getColor(R.color.color_black));
+			int size = getArguments().getInt(SIZE, getResources().getInteger(R.integer.size_brush_medium));
+			setGestureColorAndSize(color, size);
+		}
 	}
 
+	public void setGestureColorAndSize(SkColor color, SkSize size) {
+		setGestureColorAndSize(SkColor.getColor(getResources(), color), size.getSize());
+	}
+	
+	private void setGestureColorAndSize(int color, int size) {
+		gestureView.setGestureColor(color);
+		gestureView.setGestureStrokeWidth(size);
+	}
+	
 	public Bitmap getSketchBimap() {
 		return sketchView.getBitmap();
 	}

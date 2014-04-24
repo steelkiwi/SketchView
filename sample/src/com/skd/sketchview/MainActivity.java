@@ -5,7 +5,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
-import android.widget.Toast;
 
 import com.skd.sketchview.dialogs.ColorPickerDialog;
 import com.skd.sketchview.dialogs.EraserSizePickerDialog;
@@ -15,26 +14,45 @@ import com.skd.sketchview.settings.SkSize;
 
 //TODO
 /*
+ * save image on orientation change
+ * 
  * action bar:
  * --add picture bg (open gallery to choose image)
  * */
 
 public class MainActivity extends ActionBarActivity {
 
+	private SkColor curColor;
+	private SkSize curSize;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
+		initGestureColorAndSize();
+		
 		if (savedInstanceState == null) {
 			attachSketchFragment();
 		}
 	}
 
+	private void initGestureColorAndSize() {
+		curColor = SkColor.getDefaultColor(getResources());
+		curSize = SkSize.getDefaultSize(getResources());
+	}
+	
 	private void attachSketchFragment() {
+		Bundle args = new Bundle();
+		args.putInt(SketchFragment.COLOR, SkColor.getColor(getResources(), curColor));
+		args.putInt(SketchFragment.SIZE, curSize.getSize());
+		
+		SketchFragment frag = new SketchFragment();
+		frag.setArguments(args);
+		
 		getSupportFragmentManager()
 			.beginTransaction()
-			.add(R.id.container, new SketchFragment(), SketchFragment.class.getSimpleName())
+			.add(R.id.container, frag, SketchFragment.class.getSimpleName())
 			.commit();
 	}
 	
@@ -99,7 +117,8 @@ public class MainActivity extends ActionBarActivity {
 	}
 	
 	public void onColorSet(SkColor color) {
-		Toast.makeText(MainActivity.this, color.getTitle(), Toast.LENGTH_SHORT).show();
+		curColor = color;
+		getSketchFragment().setGestureColorAndSize(curColor, curSize);
 	}
 	
 	private void chooseSize() {
@@ -108,7 +127,8 @@ public class MainActivity extends ActionBarActivity {
 	}
 	
 	public void onSizeSet(SkSize size) {
-		Toast.makeText(MainActivity.this, size.getTitle(), Toast.LENGTH_SHORT).show();
+		curSize = size;
+		getSketchFragment().setGestureColorAndSize(curColor, curSize);
 	}
 	
 	private void chooseEraserSize() {
@@ -117,7 +137,9 @@ public class MainActivity extends ActionBarActivity {
 	}
 	
 	public void onEraserSizeSet(SkSize size) {
-		Toast.makeText(MainActivity.this, size.getTitle(), Toast.LENGTH_SHORT).show();
+		curColor = SkColor.getEraserColor(getResources());
+		curSize = size;
+		getSketchFragment().setGestureColorAndSize(curColor, curSize);
 	}
 	
 	private void chooseImage() {

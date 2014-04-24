@@ -56,7 +56,6 @@ public class SizeAdapter extends BaseAdapter {
 	    SkSize size = getItem(position);
 	    
 	    holder.mTitle.setText(size.getTitle());
-	    int sz = (int) parent.getContext().getResources().getDimension(R.dimen.size_brush_thick) - (int) parent.getContext().getResources().getDimension(size.getSize());
 	    switch (type) {
 		    case BRUSH: {
 		    	holder.mPreview.setBackgroundColor(parent.getResources().getColor(android.R.color.transparent));
@@ -66,11 +65,16 @@ public class SizeAdapter extends BaseAdapter {
 		    case ERASER: {
 		    	holder.mPreview.setBackgroundColor(parent.getResources().getColor(android.R.color.black));
 		    	holder.mPreview.setImageResource(android.R.color.white);
-		    	sz = (sz == 0) ? 1 : sz;
 		    	break;
 		    }
 	    }
-	    holder.mPreview.setPadding(sz, sz, sz, sz);
+	    int pad = 0;
+	    switch (size.getSizeResourceId()) {
+		    case R.dimen.size_brush_thin: pad = (int) parent.getContext().getResources().getDimension(R.dimen.preview_brush_thin_padding); break;
+		    case R.dimen.size_brush_medium: pad = (int) parent.getContext().getResources().getDimension(R.dimen.preview_brush_medium_padding); break;
+		    case R.dimen.size_brush_thick: pad = (int) parent.getContext().getResources().getDimension(R.dimen.preview_brush_thick_padding); break;
+	    }
+	    holder.mPreview.setPadding(pad, pad, pad, pad);
 
 	    return convertView;
 	}

@@ -24,6 +24,10 @@ public class SkColor {
 		return colorResId;
 	}
 	
+	public static int getColor(Resources r, SkColor color) {
+		return r.getColor(color.getColorResourceId());
+	}
+	
 	public static ArrayList<SkColor> getColors(Resources r) {
 		ArrayList<SkColor> colors = new ArrayList<SkColor>();
 		colors.add(new SkColor(r.getString(R.string.dlg_color_red), 	R.color.color_red));
@@ -37,6 +41,14 @@ public class SkColor {
 		colors.add(new SkColor(r.getString(R.string.dlg_color_black), 	R.color.color_black));
 		colors.add(new SkColor(r.getString(R.string.dlg_color_white), 	R.color.color_white));
 		return colors;
+	}
+	
+	public static SkColor getDefaultColor(Resources r) {
+		return new SkColor(r.getString(R.string.dlg_color_black), R.color.color_black);
+	}
+	
+	public static SkColor getEraserColor(Resources r) {
+		return new SkColor(r.getString(R.string.dlg_color_white), R.color.color_white);
 	}
 	
 }
