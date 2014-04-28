@@ -17,11 +17,13 @@ public class SizeAdapter extends BaseAdapter {
 	public enum sizeType { BRUSH, ERASER };
 	
 	private ArrayList<SkSize> sizes;
+	private SkSize curSize;
 	private sizeType type;
 	
-	public SizeAdapter(ArrayList<SkSize> sizes, sizeType type) {
+	public SizeAdapter(ArrayList<SkSize> sizes, SkSize curSize, sizeType type) {
 		super();
 		this.sizes = sizes;
+		this.curSize = curSize;
 		this.type = type;
 	}
 
@@ -54,6 +56,13 @@ public class SizeAdapter extends BaseAdapter {
 	    }
 
 	    SkSize size = getItem(position);
+	    
+	    if (size.getSizeResourceId() == curSize.getSizeResourceId()) {
+	    	convertView.setBackgroundColor(parent.getContext().getResources().getColor(R.color.list_highlight_color));
+	    }
+	    else {
+	    	convertView.setBackgroundResource(R.drawable.list_item_bg);
+	    }
 	    
 	    holder.mTitle.setText(size.getTitle());
 	    switch (type) {

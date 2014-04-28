@@ -25,7 +25,7 @@ public class ColorPickerDialog extends DialogFragment implements OnItemClickList
 		View view = li.inflate(R.layout.dialog_main, null);
 		
 		ListView list = (ListView) view.findViewById(android.R.id.list);
-		listAdapter = new ColorAdapter(SkColor.getColors(getResources()));
+		listAdapter = new ColorAdapter(SkColor.getColors(getResources()), ((MainActivity) getActivity()).getCurColor());
 		list.setAdapter(listAdapter);
 		list.setOnItemClickListener(this);
 		

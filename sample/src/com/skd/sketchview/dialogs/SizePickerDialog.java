@@ -26,7 +26,7 @@ public class SizePickerDialog extends DialogFragment implements OnItemClickListe
 		View view = li.inflate(R.layout.dialog_main, null);
 		
 		ListView list = (ListView) view.findViewById(android.R.id.list);
-		listAdapter = new SizeAdapter(SkSize.getSizes(getResources()), sizeType.BRUSH);
+		listAdapter = new SizeAdapter(SkSize.getSizes(getResources()), ((MainActivity) getActivity()).getCurSize(), sizeType.BRUSH);
 		list.setAdapter(listAdapter);
 		list.setOnItemClickListener(this);
 		

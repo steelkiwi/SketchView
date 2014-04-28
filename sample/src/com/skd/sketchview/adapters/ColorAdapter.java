@@ -15,10 +15,12 @@ import com.skd.sketchview.settings.SkColor;
 public class ColorAdapter extends BaseAdapter {
 
 	private ArrayList<SkColor> colors;
+	private SkColor curColor;
 	
-	public ColorAdapter(ArrayList<SkColor> colors) {
+	public ColorAdapter(ArrayList<SkColor> colors, SkColor curColor) {
 		super();
 		this.colors = colors;
+		this.curColor = curColor;
 	}
 
 	@Override
@@ -50,6 +52,13 @@ public class ColorAdapter extends BaseAdapter {
 	    }
 
 	    SkColor color = getItem(position);
+	    
+	    if (color.getColorResourceId() == curColor.getColorResourceId()) {
+	    	convertView.setBackgroundColor(parent.getContext().getResources().getColor(R.color.list_highlight_color));
+	    }
+	    else {
+	    	convertView.setBackgroundResource(R.drawable.list_item_bg);
+	    }
 	    
 	    holder.mTitle.setText(color.getTitle());
 	    holder.mPreview.setImageResource(color.getColorResourceId());

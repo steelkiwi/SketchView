@@ -14,6 +14,8 @@ import com.skd.sketchview.settings.SkSize;
 
 //TODO
 /*
+ * undo option
+ * 
  * save image on orientation change
  * 
  * action bar:
@@ -139,7 +141,7 @@ public class MainActivity extends ActionBarActivity {
 	public void onEraserSizeSet(SkSize size) {
 		curColor = SkColor.getEraserColor(getResources());
 		curSize = size;
-		getSketchFragment().setGestureColorAndSize(curColor, curSize);
+		getSketchFragment().setGestureColorAndSize(SkColor.getEraserColor(getResources()), curSize);
 	}
 	
 	private void chooseImage() {
@@ -149,6 +151,14 @@ public class MainActivity extends ActionBarActivity {
 	private void save() {
 		SaveSketchAsyncTask task = new SaveSketchAsyncTask(MainActivity.this);
 		task.execute(getSketchFragment().getSketchBimap());
+	}
+
+	public SkColor getCurColor() {
+		return curColor;
+	}
+
+	public SkSize getCurSize() {
+		return curSize;
 	}
 	
 }

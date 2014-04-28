@@ -26,7 +26,7 @@ public class EraserSizePickerDialog extends DialogFragment implements OnItemClic
 		View view = li.inflate(R.layout.dialog_main, null);
 		
 		ListView list = (ListView) view.findViewById(android.R.id.list);
-		listAdapter = new SizeAdapter(SkSize.getSizes(getResources()), sizeType.ERASER);
+		listAdapter = new SizeAdapter(SkSize.getSizes(getResources()), ((MainActivity) getActivity()).getCurSize(), sizeType.ERASER);
 		list.setAdapter(listAdapter);
 		list.setOnItemClickListener(this);
 		
