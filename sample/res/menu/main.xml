@@ -19,13 +19,18 @@
         android:title="@string/action_eraser"
         app:showAsAction="ifRoom"/>
     <item
+        android:id="@+id/action_undo"
+        android:orderInCategory="104"
+        android:title="@string/action_undo"
+        app:showAsAction="always"/>
+    <item
         android:id="@+id/action_save"
-        android:orderInCategory="103"
+        android:orderInCategory="105"
         android:title="@string/action_save"
         app:showAsAction="always"/>
     <item
         android:id="@+id/action_bg"
-        android:orderInCategory="104"
+        android:orderInCategory="106"
         android:title="@string/action_bg"
         app:showAsAction="never"/>
 

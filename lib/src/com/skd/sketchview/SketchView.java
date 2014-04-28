@@ -99,6 +99,15 @@ public class SketchView extends View implements OnGestureListener, OnGesturePerf
 		pathes.add(new Pair<Path, Paint>(path, paint));
 	}
 	
+	public boolean removeLastPath() {
+		if (pathes == null || pathes.size() <= 0) {
+			return true;
+		}
+		pathes.remove(pathes.size()-1);
+		this.invalidate();
+		return false;
+	}
+	
 	public Bitmap getBitmap() {
 		this.setDrawingCacheEnabled(true);  
         this.buildDrawingCache();

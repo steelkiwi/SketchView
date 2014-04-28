@@ -6,8 +6,11 @@
     <string name="action_color">Color</string>
     <string name="action_size">Size</string>
     <string name="action_eraser">Eraser</string>
+    <string name="action_undo">Undo</string>
     <string name="action_save">Save</string>
     <string name="action_bg">Add Image</string>
+    
+    <string name="empty_sketch">Sketch is empty</string>
 
     <string name="dlg_close">Close</string>
     

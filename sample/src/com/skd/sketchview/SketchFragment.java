@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.skd.sketchview.settings.SkColor;
 import com.skd.sketchview.settings.SkSize;
@@ -53,6 +54,13 @@ public class SketchFragment extends Fragment {
 	private void setGestureColorAndSize(int color, int size) {
 		gestureView.setGestureColor(color);
 		gestureView.setGestureStrokeWidth(size);
+	}
+	
+	public void undo() {
+		boolean isLast = sketchView.removeLastPath();
+		if (isLast) {
+			Toast.makeText(getActivity(), getString(R.string.empty_sketch), Toast.LENGTH_SHORT).show();
+		}
 	}
 	
 	public Bitmap getSketchBimap() {

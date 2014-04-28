@@ -14,8 +14,6 @@ import com.skd.sketchview.settings.SkSize;
 
 //TODO
 /*
- * undo option
- * 
  * save image on orientation change
  * 
  * action bar:
@@ -78,6 +76,9 @@ public class MainActivity extends ActionBarActivity {
         MenuItem bgItem = menu.findItem(R.id.action_bg);
         bgItem.setOnMenuItemClickListener(onMenuItemClickListener);
         
+        MenuItem undoItem = menu.findItem(R.id.action_undo);
+        undoItem.setOnMenuItemClickListener(onMenuItemClickListener);
+        
         MenuItem saveItem = menu.findItem(R.id.action_save);
         saveItem.setOnMenuItemClickListener(onMenuItemClickListener);
         
@@ -102,6 +103,10 @@ public class MainActivity extends ActionBarActivity {
 				}
 				case R.id.action_bg: {
 					chooseImage();
+					return true;
+				}
+				case R.id.action_undo: {
+					undo();
 					return true;
 				}
 				case R.id.action_save: {
@@ -146,6 +151,10 @@ public class MainActivity extends ActionBarActivity {
 	
 	private void chooseImage() {
 
+	}
+	
+	private void undo() {
+		getSketchFragment().undo();
 	}
 	
 	private void save() {
