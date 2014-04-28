@@ -53,6 +53,8 @@ public class SaveSketchAsyncTask extends AsyncTask<Bitmap, Void, String> {
 		else {
 			Toast.makeText(activityRef.get(), activityRef.get().getString(R.string.error_save), Toast.LENGTH_SHORT).show();
 		}
+		
+		activityRef.get().sketchSaved(result);
 	}
 	
 }

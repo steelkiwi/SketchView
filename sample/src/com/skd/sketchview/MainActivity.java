@@ -1,5 +1,6 @@
 package com.skd.sketchview;
 
+import java.io.File;
 import java.io.IOException;
 
 import android.content.Intent;
@@ -24,6 +25,7 @@ public class MainActivity extends ActionBarActivity {
 	
 	private SkColor curColor;
 	private SkSize curSize;
+	private boolean needShare = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +97,9 @@ public class MainActivity extends ActionBarActivity {
         MenuItem saveItem = menu.findItem(R.id.action_save);
         saveItem.setOnMenuItemClickListener(onMenuItemClickListener);
         
+        MenuItem shareItem = menu.findItem(R.id.action_share);
+        shareItem.setOnMenuItemClickListener(onMenuItemClickListener);
+        
         return true;
 	}
 	
@@ -124,6 +129,10 @@ public class MainActivity extends ActionBarActivity {
 				}
 				case R.id.action_save: {
 					save();
+					return true;
+				}
+				case R.id.action_share: {
+					saveAndShare();
 					return true;
 				}
 				default: return false;
@@ -177,6 +186,26 @@ public class MainActivity extends ActionBarActivity {
 		task.execute(getSketchFragment().getSketchBimap());
 	}
 
+	public void sketchSaved(String path) {
+		if (needShare) {
+			needShare = false;
+			share(Uri.fromFile(new File(path)));
+		}
+	}
+	
+	private void saveAndShare() {
+		needShare = true;
+		save();
+	}
+	
+	private void share(Uri uri) {
+		Intent shareIntent = new Intent();
+		shareIntent.setAction(Intent.ACTION_SEND);
+		shareIntent.setType("image/jpeg");
+		shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+		startActivity(Intent.createChooser(shareIntent, "Share Sketch"));
+	}
+	
 	public SkColor getCurColor() {
 		return curColor;
 	}
