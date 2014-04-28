@@ -13,6 +13,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Pair;
 import android.view.MotionEvent;
@@ -20,13 +21,18 @@ import android.view.View;
 
 public class SketchView extends View implements OnGestureListener, OnGesturePerformedListener {
 	
-	private Paint defaultPaint;
+	private int canvasW, canvasH;
+	private Rect bitmapRect, canvasRect;
+	
+	private Paint defaultPaint, bgPaint;
 	private HashMap<Pair<Integer, Integer>, Paint> brushes;
 	private ArrayList<Pair<Path, Paint>> pathes;
+	private Bitmap bgBitmap;
 	
 	public SketchView(Context context) {
 		super(context);
 		createDefaultPaint();
+		createBgPaint();
 	}
 
 	public SketchView(Context context, AttributeSet attrs) {
@@ -36,12 +42,13 @@ public class SketchView extends View implements OnGestureListener, OnGesturePerf
 	public SketchView(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		createDefaultPaint();
+		createBgPaint();
 	}
 
 	private void createDefaultPaint() {
 		defaultPaint = new Paint();
 		defaultPaint.setAntiAlias(true);
-	    defaultPaint.setDither(true);
+	    defaultPaint.setDither(false);
 	    defaultPaint.setColor(Color.BLACK);
 	    defaultPaint.setStyle(Paint.Style.STROKE);
 	    defaultPaint.setStrokeJoin(Paint.Join.ROUND);
@@ -49,9 +56,27 @@ public class SketchView extends View implements OnGestureListener, OnGesturePerf
 	    defaultPaint.setStrokeWidth(8);
 	}
 	
+	private void createBgPaint() {
+		bgPaint = new Paint();
+		bgPaint.setAntiAlias(true);
+		bgPaint.setDither(false);
+	}
+	
+	@Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        this.canvasW = w;
+        this.canvasH = h;
+        this.canvasRect = new Rect(0, 0, canvasW, canvasH);
+        this.bitmapRect = new Rect();
+        super.onSizeChanged(w, h, oldw, oldh);
+    }
+	
 	@Override
 	protected void onDraw(Canvas canvas) {
 		setBackgroundColor(Color.WHITE);
+		if (bgBitmap != null) {
+			canvas.drawBitmap(bgBitmap, bitmapRect, canvasRect, bgPaint);
+		}
 		if (pathes == null) { return; }
 		for (int i=0, len=pathes.size(); i<len; i++) {
             canvas.drawPath(pathes.get(i).first, pathes.get(i).second);
@@ -106,6 +131,26 @@ public class SketchView extends View implements OnGestureListener, OnGesturePerf
 		pathes.remove(pathes.size()-1);
 		this.invalidate();
 		return false;
+	}
+	
+	public void setAsBackground(Bitmap bitmap) {
+		if (bgBitmap != null) {
+			bgBitmap.recycle();
+		}
+		bgBitmap = bitmap;
+		
+		int minW = Math.min(canvasW, bitmap.getWidth());
+		int maxW = Math.max(canvasW, bitmap.getWidth());
+		
+		int minH = Math.min(canvasH, bitmap.getHeight());
+		int maxH = Math.max(canvasH, bitmap.getHeight());
+		
+		int bmX = (maxW == bitmap.getWidth())  ? (maxW - minW) / 2 : 0;
+		int bmY = (maxH == bitmap.getHeight()) ? (maxH - minH) / 2 : 0;
+		
+		bitmapRect.set(bmX, bmY, bmX + minW, bmY + minH);
+		
+		this.invalidate();
 	}
 	
 	public Bitmap getBitmap() {

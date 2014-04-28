@@ -1,6 +1,12 @@
 package com.skd.sketchview;
 
+import java.io.IOException;
+
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,16 +18,10 @@ import com.skd.sketchview.dialogs.SizePickerDialog;
 import com.skd.sketchview.settings.SkColor;
 import com.skd.sketchview.settings.SkSize;
 
-//TODO
-/*
- * save image on orientation change
- * 
- * action bar:
- * --add picture bg (open gallery to choose image)
- * */
-
 public class MainActivity extends ActionBarActivity {
 
+	private static final int IMAGE_PICK_INTENT = 1;
+	
 	private SkColor curColor;
 	private SkSize curSize;
 	
@@ -58,6 +58,19 @@ public class MainActivity extends ActionBarActivity {
 	
 	private SketchFragment getSketchFragment() {
 		return (SketchFragment) getSupportFragmentManager().findFragmentByTag(SketchFragment.class.getSimpleName());
+	}
+	
+	@Override
+	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+		if (arg0 == IMAGE_PICK_INTENT && arg1 == RESULT_OK) {
+			Uri uri = arg2.getData();
+			try {
+				Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+				getSketchFragment().setSketchBackground(bitmap);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	@Override
@@ -150,7 +163,9 @@ public class MainActivity extends ActionBarActivity {
 	}
 	
 	private void chooseImage() {
-
+		Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+		i.setType("image/*");
+		startActivityForResult(i, IMAGE_PICK_INTENT);
 	}
 	
 	private void undo() {

@@ -63,6 +63,10 @@ public class SketchFragment extends Fragment {
 		}
 	}
 	
+	public void setSketchBackground(Bitmap bitmap) {
+		sketchView.setAsBackground(bitmap);
+	}
+
 	public Bitmap getSketchBimap() {
 		return sketchView.getBitmap();
 	}
