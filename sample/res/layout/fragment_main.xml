@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<!--
  Copyright (C) 2014 Steelkiwi Development, Julia Zudikova
   
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,26 +14,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-<android.gesture.GestureOverlayView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.skd.sketchview.SketchView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/gestureOverlay"
+    android:id="@+id/sketchView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:eventsInterceptionEnabled="true"
-    android:fadeEnabled="false"
-    android:gestureColor="@color/color_black"
-    android:gestureStrokeAngleThreshold="0.001"
-    android:gestureStrokeLengthThreshold="0.001"
-    android:gestureStrokeSquarenessThreshold="0.001"
-    android:gestureStrokeType="single"
-    android:gestureStrokeWidth="@integer/size_brush_medium"
-    android:orientation="vertical"
-    android:uncertainGestureColor="@android:color/transparent" >
-
-    <com.skd.sketchview.SketchView
-        android:id="@+id/sketchCanvas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-</android.gesture.GestureOverlayView>
+    android:layout_height="match_parent" />

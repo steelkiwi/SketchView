@@ -16,7 +16,6 @@
 
 package com.skd.sketchview;
 
-import android.gesture.GestureOverlayView;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -38,7 +37,6 @@ public class SketchFragment extends Fragment {
 	public static final String COLOR = "argColor";
 	public static final String SIZE = "argSize";
 	
-	private GestureOverlayView gestureView;
 	private SketchView sketchView;
 	
 	public SketchFragment() {}
@@ -53,12 +51,8 @@ public class SketchFragment extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		
-		sketchView = (SketchView) getView().findViewById(R.id.sketchCanvas);
+		sketchView = (SketchView) getView().findViewById(R.id.sketchView);
 		sketchView.setBrushes(SketchManager.createBrushes(getResources()));
-		
-		gestureView = (GestureOverlayView) getView().findViewById(R.id.gestureOverlay);
-		gestureView.addOnGestureListener(sketchView);
-		gestureView.addOnGesturePerformedListener(sketchView);
 		
 		if (getArguments() != null) {
 			int color = getArguments().getInt(COLOR, getResources().getColor(R.color.color_black));
@@ -72,23 +66,22 @@ public class SketchFragment extends Fragment {
 	}
 	
 	private void setGestureColorAndSize(int color, int size) {
-		gestureView.setGestureColor(color);
-		gestureView.setGestureStrokeWidth(size);
+		sketchView.setGestureColorAndSize(color, size);
 	}
 	
 	public void undo() {
-		boolean isLast = sketchView.removeLastPath();
+		boolean isLast = sketchView.undoLastGesture();
 		if (isLast) {
 			Toast.makeText(getActivity(), getString(R.string.empty_sketch), Toast.LENGTH_SHORT).show();
 		}
 	}
 	
 	public void setSketchBackground(Bitmap bitmap) {
-		sketchView.setAsBackground(bitmap);
+		sketchView.setSketchBackground(bitmap);
 	}
 
 	public Bitmap getSketchBimap() {
-		return sketchView.getBitmap();
+		return sketchView.getSketchBimap();
 	}
 	
 }
