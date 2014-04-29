@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2014 Steelkiwi Development, Julia Zudikova
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ * 		http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.skd.sketchview;
 
 import java.io.File;
@@ -18,6 +34,17 @@ import com.skd.sketchview.dialogs.EraserSizePickerDialog;
 import com.skd.sketchview.dialogs.SizePickerDialog;
 import com.skd.sketchview.settings.SkColor;
 import com.skd.sketchview.settings.SkSize;
+
+/*
+ * A sample of sketch editor which supports basic actions:
+ * - set brush color (from a range of available colors)
+ * - set brush size (from a range of available sizes)
+ * - set eraser size (from a range of available sizes)
+ * - set image as background of the sketch
+ * - undo option (all gestures can be undone)
+ * - save sketch
+ * - share sketch.
+ */
 
 public class MainActivity extends ActionBarActivity {
 
